@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--头文件-->
+
+<mapper namespace="com.deyunjiaoyu.sportplay.dao.FoodInfoDao">
+    <select id="getAllFood" resultType="com.deyunjiaoyu.sportplay.bean.FoodInfo">
+        SELECT
+        cl.id,
+        cl.food_type,
+        cl.food_name,
+        cl.calorie,
+        cl.score,
+        c.title AS food_type_title
+        FROM
+        about_food cl
+        JOIN
+        food_type c ON c.id = cl.food_type
+        <where>
+            <if test="food_name != null">
+                AND cl.food_name LIKE #{food_name}
+            </if>
+        </where>
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+
+    <select id="getFoodCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM `about_food`
+        <if test="food_name!=null ">
+            WHERE food_name like #{food_name}
+        </if>
+    </select>
+
+
+    <insert id="addFood">
+    INSERT INTO about_food
+    (score, calorie, food_type,food_name)
+    VALUES
+    (#{score}, #{calorie}, #{food_type},#{food_name})
+</insert>
+
+    <select id="getUpdateFood" resultType="com.deyunjiaoyu.sportplay.bean.FoodInfo">
+         SELECT * FROM about_food WHERE id = #{id}
+    </select>
+
+    <update id="editFood">
+        UPDATE about_food SET score = #{score} , calorie = #{calorie} ,id = #{id},food_type = #{food_type}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteFood">
+         DELETE FROM about_food WHERE id = #{id}
+    </delete>
+</mapper>

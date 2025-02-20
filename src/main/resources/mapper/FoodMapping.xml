@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.deyunjiaoyu.sportplay.dao.FoodDao">
+    <!--查出所有分类-->
+    <select id="getAllFoodType" resultType="com.deyunjiaoyu.sportplay.bean.FoodType">
+        SELECT * FROM food_type
+        <where>
+            <if test="title != null">
+                AND title like #{title}
+            </if>
+        </where>
+    </select>
+<!--    分类树数目-->
+    <select id="getFoodTypeCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM `food_type`
+        <if test="title!=null ">
+            WHERE title like #{title}
+        </if>
+    </select>
+<!--    删除分类-->
+    <delete id="deleteFoodType">
+         DELETE FROM food_type WHERE id = #{id}
+    </delete>
+<!--    找到要更新的-->
+    <select id="getUpdateFoodType" resultType="com.deyunjiaoyu.sportplay.bean.FoodType">
+         SELECT * FROM food_type WHERE id = #{id}
+    </select>
+<!--    正式更新-->
+    <update id="editFoodType">
+        UPDATE food_type SET title = #{title} WHERE id = #{id}
+    </update>
+<!--    添加-->
+    <!-- 在你的mapper XML文件中 -->
+    <insert id="addFoodType">
+    INSERT INTO food_type (title) VALUES (#{title})
+</insert>
+
+
+
+
+</mapper>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--头文件-->
+
+<mapper namespace="com.deyunjiaoyu.sportplay.dao.UserDao">
+    <select id="getUserByMessage" resultType="com.deyunjiaoyu.sportplay.bean.User">
+       	SELECT * FROM easyuser
+       	WHERE username=#{username} AND password=#{password} AND state = 1 AND role = #{role}
+    </select>
+<!--查出所有普通用户-->
+    <select id="getAllUser" resultType="com.deyunjiaoyu.sportplay.bean.User">
+        SELECT * FROM easyuser
+        <where>
+            role='普通用户'
+            <if test="username != null">
+                AND username like #{username}
+            </if>
+        </where>
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+<!--    查重名-->
+    <select id="findByUsername" resultType="com.deyunjiaoyu.sportplay.bean.User">
+        SELECT * FROM easyuser WHERE username like #{username}
+    </select>
+
+
+<!--查出管理员-->
+
+    <select id="getAllAdmin" resultType="com.deyunjiaoyu.sportplay.bean.User">
+        SELECT * FROM easyuser WHERE role='超级管理员' AND username = #{username}
+    </select>
+
+
+    <select id="getUserCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM `easyuser`
+        <if test="username!=null ">
+            WHERE username like #{username}
+        </if>
+    </select>
+
+    <update id="updateState" >
+        UPDATE easyuser SET state = #{state} WHERE id = #{id}
+    </update>
+
+    <insert id="addUser">
+        INSERT INTO easyuser
+        (username,password,email,role,state,phone,name,money)
+        VALUE
+        (#{username},#{password},#{email},'普通用户',1,#{phone},#{name},0)
+    </insert>
+
+    <delete id="deleteUser">
+         DELETE FROM easyuser WHERE id = #{id}
+    </delete>
+
+    <select id="getUpdateUser" resultType="com.deyunjiaoyu.sportplay.bean.User">
+         SELECT * FROM easyuser WHERE id = #{id}
+    </select>
+    <update id="editUser">
+        UPDATE easyuser SET username = #{username} , password = #{password} ,
+        email = #{email} ,phone = #{phone}, `name`=#{name} ,pic=#{pic} WHERE id = #{id}
+    </update>
+
+    <update id="changeUser">
+        UPDATE easyuser SET role = #{role} WHERE id = #{id}
+    </update>
+
+<!--    注册-->
+    <insert id="insertNewUser" >
+        INSERT INTO easyuser (username, password, name, email, phone, birth, role, state,money)
+        VALUES (#{username}, #{password}, #{name}, #{email}, #{phone}, #{birth}, '普通用户', 1,0)
+    </insert>
+
+    <update id="addMoney">
+        UPDATE easyuser SET money = #{amount} WHERE id = #{id}
+    </update>
+
+
+    <select id="getWeight" resultType="com.deyunjiaoyu.sportplay.bean.UserCondition">
+         SELECT * FROM usercondition WHERE `user` = #{id}
+    </select>
+
+    <update id="setWeight">
+        UPDATE usercondition
+        SET weight=#{weight},dreamWeight=#{dreamWeight}
+        WHERE `user`=#{id};
+    </update>
+
+    <insert id="weightLog" >
+        INSERT INTO weight_log (user_id, date, weight)
+        VALUES (#{id}, #{currentTime}, #{weight})
+    </insert>
+
+    <select id="weightChart" resultType="com.deyunjiaoyu.sportplay.bean.WeightLog">
+         SELECT date,weight FROM weight_log WHERE user_id = #{id}
+    </select>
+
+    <insert id="classCollected" >
+        INSERT INTO class_collect (class_id, user_id)
+        VALUES (#{id}, #{userId})
+    </insert>
+    <delete id="classUnCollected">
+        DELETE FROM class_collect WHERE class_id = #{id} AND user_id = #{userId}
+    </delete>
+
+    <select id="getUserComment" resultType="com.deyunjiaoyu.sportplay.bean.Comment">
+        SELECT
+        c.content,
+        c.comment_time,
+        c.like_count,
+        c.user_id,
+        u.name AS user_name
+        FROM
+        comment c
+        INNER JOIN
+        easyuser u ON c.user_id = u.id
+        WHERE
+        c.class_id = #{id}
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+    <insert id="sendComment" >
+        INSERT INTO comment (user_id,class_id,content,comment_time)
+        VALUES (#{user_id}, #{class_id}, #{content},#{comment_time})
+    </insert>
+    <select id="findUser" resultType="com.deyunjiaoyu.sportplay.bean.HealthData">
+        SELECT user_id FROM healthData WHERE user_id = #{id};
+    </select>
+    <update id="editHealth">
+        UPDATE healthData
+        SET weight = #{weight}, height = #{height}, xinlv = #{xinlv}, tiwen = #{tiwen}, shousuoya = #{shousuoya}, shuzhangya = #{shuzhangya}, emptyXuetang = #{emptyXuetang}, afterXuetang = #{afterXuetang}, xuezhi = #{xuezhi}, niaosuan = #{niaosuan}
+        WHERE user_id = #{user_id};
+    </update>
+
+    <select id="getHealth" resultType="com.deyunjiaoyu.sportplay.bean.HealthData">
+        SELECT * FROM healthData WHERE user_id = #{id};
+    </select>
+    <select id="getRun" resultType="com.deyunjiaoyu.sportplay.bean.RunData">
+        SELECT * FROM rundata WHERE user_id = #{id};
+    </select>
+
+    <insert id="addRun">
+        INSERT INTO rundata (user_id,date,step,currentTime)
+        VALUES (#{user_id}, #{date}, #{step},#{currentTime})
+    </insert>
+
+    <update id="getRundataByUserIdAndDate" >
+        UPDATE rundata
+        SET step = #{newStep}
+        WHERE user_id = #{id}
+        AND date = #{date}
+    </update>
+
+    <insert id="addTodayCalorie">
+        INSERT INTO todayCalorie (user_id,calorie,creatTime)
+        VALUES (#{user_id}, #{calorie}, #{currentTime})
+    </insert>
+
+    <select id="existsTodayCalorie" resultType="boolean">
+        SELECT COUNT(1) > 0
+        FROM todayCalorie
+        WHERE user_id = #{user_id}
+        AND DATE(creatTime) = #{currentDate}
+    </select>
+    <update id="editTodayCalorie" >
+        UPDATE todayCalorie
+        SET calorie = #{calorie}
+        WHERE user_id = #{user_id}
+        AND DATE(creatTime) = #{currentDate}
+    </update>
+    <select id="getAllCalorie" resultType="com.deyunjiaoyu.sportplay.bean.TodayCalorie">
+        SELECT *
+        FROM todayCalorie
+        WHERE user_id = #{user_id}
+    </select>
+
+    <select id="getAllComment" resultType="map">
+    SELECT
+        eu.username,
+        cl.price,
+        c.id,
+        c.content,
+        eu.email,
+        c.comment_time,
+        cl.title AS class_title
+    FROM comment c
+    INNER JOIN easyuser eu ON c.user_id = eu.id
+    INNER JOIN class cl ON c.class_id = cl.id
+</select>
+
+    <select id="getCommentCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM comment
+
+    </select>
+    <delete id="deleteComment">
+         DELETE FROM comment WHERE id = #{id}
+    </delete>
+</mapper>

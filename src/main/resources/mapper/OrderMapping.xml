@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--头文件-->
+
+<mapper namespace="com.deyunjiaoyu.sportplay.dao.OrderDao">
+
+<!--查出所有普通用户-->
+    <select id="getAllOrder" resultType="com.deyunjiaoyu.sportplay.bean.Order">
+        <!--        SELECT * FROM order-->
+        <!--        <where>-->
+        <!--            <if test="username != null">-->
+        <!--                AND username like #{username}-->
+        <!--            </if>-->
+        <!--        </where>-->
+        <!--        LIMIT #{pageStart}, #{pageSize}-->
+
+        SELECT
+        o.*,
+        eu.username AS username,
+        c.title AS title,
+        c.price
+        FROM
+        `order` o
+        LEFT JOIN easyuser eu ON o.user_id = eu.id
+        LEFT JOIN class c ON o.class_id = c.id
+        <where>
+            <if test="username != null">
+                AND eu.username like #{username}
+            </if>
+        </where>
+        LIMIT #{pageStart}, #{pageSize}
+
+    </select>
+
+<!--查找一个用户的所有订单-->
+    <select id="getOrder" resultType="com.deyunjiaoyu.sportplay.bean.Order">
+        SELECT
+        o.*,
+        c.title AS title,
+        c.cover AS cover,
+        c.price AS price
+        FROM
+        `order` o
+        LEFT JOIN easyuser eu ON  o.user_id= eu.id
+        LEFT JOIN class c ON o.class_id = c.id
+        WHERE o.user_id=#{id}
+LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+    <select id="getOrderCounts" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `order` o
+        LEFT JOIN easyuser eu ON o.user_id = eu.id
+        <if test="username != null">
+            WHERE eu.username = #{username}
+        </if>
+    </select>
+
+    <select id="getOneOrderCounts" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM `order`
+        WHERE user_id=#{id}
+    </select>
+
+    <delete id="deleteOrder">
+         DELETE FROM `order` WHERE id = #{id}
+    </delete>
+    <update id="editOrder">
+       UPDATE `order` SET status ='已取消' WHERE id = #{id}
+
+    </update>
+
+    <update id="Recharge">
+       UPDATE `easyuser` SET money =#{money}+money WHERE id = #{id}
+
+    </update>
+
+    <select id="getMoney" resultType="java.lang.Integer">
+        SELECT money
+        FROM `easyuser`
+        WHERE id=#{id}
+    </select>
+    <insert id="addOrder">
+        INSERT INTO `order` (
+             user_id, class_id, status,order_number,pay_time,name,phone
+        ) VALUES (
+             #{user_id}, #{class_id}, #{status},#{order_number},#{pay_time},#{name},#{phone}
+        )
+    </insert>
+
+    <update id="backOrder">
+       UPDATE `easyuser` SET money =#{money}+money WHERE id = #{user_id}
+    </update>
+    <update id="payOrder">
+       UPDATE `easyuser` SET money =money-#{money} WHERE id = #{user_id}
+    </update>
+</mapper>

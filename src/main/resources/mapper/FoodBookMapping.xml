@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--头文件-->
+
+<mapper namespace="com.deyunjiaoyu.sportplay.dao.FoodBookDao">
+    <select id="getAllBook" resultType="com.deyunjiaoyu.sportplay.bean.FoodBook">
+        SELECT
+        cl.id,
+        cl.food_id,
+        cl.cook_name,
+        cl.cookinfo,
+        cl.description,
+        cl.img,
+        c.food_name AS food_type_title
+        FROM
+        cookbook cl
+        JOIN
+        about_food c ON c.id = cl.food_id
+        <where>
+            <if test="cook_name != null">
+                AND cl.cook_name LIKE #{cook_name}
+            </if>
+        </where>
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+
+    <select id="getBookCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM `cookbook`
+        <if test="cook_name!=null ">
+            WHERE cook_name like #{cook_name}
+        </if>
+    </select>
+
+
+    <insert id="addBook">
+    INSERT INTO cookbook
+    (food_id, cook_name, cookinfo,description,img)
+    VALUES
+    (#{food_id}, #{cook_name}, #{cookinfo},#{description},#{img})
+</insert>
+
+    <select id="getUpdateBook" resultType="com.deyunjiaoyu.sportplay.bean.FoodBook">
+         SELECT * FROM cookbook WHERE id = #{id}
+    </select>
+
+    <update id="editBook">
+        UPDATE cookbook SET cook_name = #{cook_name} , cookinfo = #{cookinfo} ,description = #{description},img = #{img}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteBook">
+         DELETE FROM cookbook WHERE id = #{id}
+    </delete>
+</mapper>

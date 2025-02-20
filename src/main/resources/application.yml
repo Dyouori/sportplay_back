@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/easyproect?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+#
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.example.demo.model
+
+# 默认配置
+server:
+  port: 9000
+#tencentcloudapi:
+#  # 你的 secretId
+#  secretId: AKIDBF8wZzEICtOgnkU0LTN4YqunTwCF9sPi
+#  # 你的 secretKey
+#  secretKey: BBzay99wWt54r7B3jEpJahePwHPaYK9m
+#  # 请求官方地址 不变
+#  endpoint: iai.tencentcloudapi.com
+#  #地域 可不变
+#  region: ap-shanghai
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mybatis:
+  typeAliasesPackage: com.face.bean
+  mapperLocations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+alipay:
+  app-id: 9021000143692617
+  gateway-url: https://openapi-sandbox.dl.alipaydev.com/gateway.do
+  notify-url: http://6b6591f5.r1.cpolar.top
+
+  # private-key：在支付宝开放平台秘钥工具中生成的应用私钥
+  private-key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCXFlZin6ZtgVrfGF6vHh+sXS1QT7Otuigzr6L3t7Zkl6GoyAp1V9yPg/OuT8JsKt0JNlSzo7YS/QOZpSsp/XT71/dbcCgqLuHDEdLdv1Gk9SzYUQ4iWgrB/EROv2+ZCxJPSMnqtv2FhGHe5EVlN4hIr7/WiAwKIfUhJqawOUwjuqGN4ihkjyvltzzD2jfmDgwEeZitVKj746am97lV9Zx/O1CuQiYjhk1Z7Q20UJiBtjFkaCuOXBMUWVmiwBBHjEqELq1RXmpFF1HLfAFV6L7ltodXCNR6fazj7MM4x7jFBN30GJDc2TRRSqvAi0QgRBtQQOr5N+2bR7tmQ54Do4ZjAgMBAAECggEAWVxi144pt1bs0krtpZGhlia+KGQbl8MlB/z33KASBskQWm2GkgTXdSLMO+r8yVFIzqwNyPopNG3ldTiVoQ5B5LrFmJVrjBeSe/fMyk7gETrZvU+jlnm/JyD3ncPoU5KSz8XzdxmoNRIpeNV2nfkMaEFaq55n0I5pF6RurogVGoPcr7G8I6BSbMyXjlEP3ZxH7ABWnrDQ27aoRQOcwQ7QXMmylnKmMXRdHJPeJ9R9Lecl8+HYmQKsLXeH2KkrH0osTbhl/MpqORn3kYkvAwAWCL8QsPuXIOxf+Ii41cjyRcZ6gJCHv/pB3OLvkaN6vwbpLZJkbKyQEmmxTcHpqJMF8QKBgQDUz3Upz2o9OGvTl401eBj9lVKtFr0ASjxI2bXfAeb86bsY6oAU/zq3RAo/VOFdKgziPHVLACpGioj/1b336wqARRZ12Ki5KefDcjgLIkICeBEXFqHC5ggh8dYJCq8oT5b+rQY1z7hEJej2rZSnowd+hXIVUKIs7b8Z8VwkYx07xwKBgQC1wA+VNPfFZFlKe6RfElppIyIzW69RpPabL3BqWlIp8u0nsEe1oWRqRAEx3RKNVxP4qG6j/MUzlFEaA6IU7I3CiIEpolCZG+XVT0mw0+7ZbeqXH/Ja2IcGe0+Avqr4a6ZTJtJ5zEy9WPyGWcg0yJGi4NfUb7Am8n+cZrx/W0DIhQKBgH7UDQ2X8cb+ozR9c8jUBIDMx3MkxAsyMu9v4LZBmfpNChZ1W1QoMEQcpsbLvWwarYb/ZSAHvyo/Uhq2tfrU93MuuY4OS6/ey6NtpPzts81o5TaPZGSVV29zg43r8iviEylA0Rys6TKkLU0mchveS48Z1L3jSmPgZS3+7F07PKbtAoGASDn291iBTlQ+l7bi71Uf0MBBix9YYJ2p0qnbhqg2Fq2PSUJofOmSOhikUOiFwt1j9mEY9towk/rQ8AGZm68V9sTAb4cteGr5vvcvVbIjLQzdOQldCnUZ052VTph24RoGkuzOn9BsfqKqV8m+IhvCpHOt0aJA4nlj9QduyT2+VPECgYAXld1OHw+tpi666ixdG1Haiv2730BLIU4zBqPyOnTCZ9Ub33jH1KzlRF3J4UnNQ4uxiu0dUVXzQr0RUHCga9097+d/KsL59mh1pmDbeWRwRgGmap314/gPsIf0BzLaJmd4qDMGrq/ZbgETrVts/edJi3CLGBLOV8oe8Js4U+sqRQ==
+  # alipay-public-key：支付宝开放平台中的支付宝公钥
+  alipay-public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlxZWYp+mbYFa3xherx4frF0tUE+zrbooM6+i97e2ZJehqMgKdVfcj4Pzrk/CbCrdCTZUs6O2Ev0DmaUrKf10+9f3W3AoKi7hwxHS3b9RpPUs2FEOIloKwfxETr9vmQsST0jJ6rb9hYRh3uRFZTeISK+/1ogMCiH1ISamsDlMI7qhjeIoZI8r5bc8w9o35g4MBHmYrVSo++Ompve5VfWcfztQrkImI4ZNWe0NtFCYgbYxZGgrjlwTFFlZosAQR4xKhC6tUV5qRRdRy3wBVei+5baHVwjUen2s4+zDOMe4xQTd9BiQ3Nk0UUqrwItEIEQbUEDq+Tftm0e7ZkOeA6OGYwIDAQAB
+  # notify-url：支付宝通过该URL通知交易状态变化
+
+  return-url: http://localhost:9000/alipay/return

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--头文件-->
+
+<mapper namespace="com.deyunjiaoyu.sportplay.dao.ClassDao">
+    <!--查出所有普通用户-->
+    <select id="getAllClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
+        SELECT
+        cl.id,
+        cl.title,
+        cl.classification_id,
+        cl.teacher,
+        cl.cover,
+        cl.description,
+        cl.price,
+        cl.level,
+        cl.suitable,
+        cl.effect,
+        cl.status,
+        cl.rate,
+        c.title AS classification_title
+        FROM
+        class cl
+        JOIN
+        classification c ON c.id = cl.classification_id
+        <where>
+            <if test="title != null">
+                AND cl.title like #{title}
+            </if>
+        </where>
+        LIMIT #{pageStart}, #{pageSize}
+    </select>
+
+    <select id="getClassCounts" resultType="java.lang.Integer">
+        SELECT count(*) FROM `class`
+        <if test="title!=null ">
+            WHERE title like #{title}
+        </if>
+    </select>
+
+    <insert id="addClass">
+    INSERT INTO class
+    (title, classification_id, teacher, cover, description, price, level, suitable, effect, status)
+    VALUES
+    (#{title}, #{classification_id}, #{teacher}, #{cover}, #{description}, #{price}, #{level}, #{suitable}, #{effect}, #{status})
+</insert>
+
+    <select id="getUpdateClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
+         SELECT * FROM class WHERE id = #{id}
+    </select>
+
+    <update id="editClass">
+        UPDATE class SET title = #{title} , classification_id = #{classification_id} ,teacher = #{teacher},effect = #{effect} ,
+        cover = #{cover}  ,description = #{description}  ,price = #{price} ,level = #{level} ,suitable = #{suitable}
+        WHERE id = #{id}
+    </update>
+    <delete id="deleteClass">
+         DELETE FROM class WHERE id = #{id}
+    </delete>
+
+<!--    chart-->
+    <select id="findClassChart" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
+        select class.*,classification.title AS classification_title from class
+        LEFT JOIN classification on class.classification_id=classification.id
+    </select>
+<!--    根据类型选择当前类型的所有课程-->
+    <select id="oneTypeClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
+        SELECT c.*
+        FROM Class c
+        JOIN Classification cl ON c.classification_id = cl.id
+        WHERE cl.title = #{classification_title};
+
+    </select>
+    <select id="oneLevelClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
+        SELECT * from class WHERE `level` = #{level};
+    </select>
+
+    <select id="getClassById" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
+        SELECT * from class WHERE `id` = #{id};
+    </select>
+
+    <update id="classLiked">
+        UPDATE class SET wish_count = wish_count + 1
+        WHERE id = #{id}
+    </update>
+    <update id="classUnLiked">
+        UPDATE class SET wish_count = wish_count - 1
+        WHERE id = #{id}
+    </update>
+    <update id="classCollected">
+        UPDATE class SET collect_count = collect_count + 1
+        WHERE id = #{id}
+    </update>
+    <update id="classUnCollected">
+        UPDATE class SET collect_count = collect_count - 1
+        WHERE id = #{id}
+    </update>
+</mapper>
