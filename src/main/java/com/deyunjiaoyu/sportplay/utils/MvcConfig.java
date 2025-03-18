@@ -16,7 +16,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/sport/**")
-         .excludePathPatterns("/sport/login", "/sport/register"); // 排除不需要被拦截的路径
+         .excludePathPatterns("/sport/login", "/sport/register","/faceLogin"); // 排除不需要被拦截的路径
     }
 
     /**

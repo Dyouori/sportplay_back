@@ -98,10 +98,10 @@
             int curMoney;
             curMoney = orderService.getMoney(userId)+ Integer.parseInt(totalAmount);
 //            curMoney =+ Integer.parseInt(totalAmount);
-            System.out.println("啊啊啊啊啊啊啊"+userId);
-            System.out.println("金额："+curMoney);
+          //  System.out.println("啊啊啊啊啊啊啊"+userId);
+         //   System.out.println("金额："+curMoney);
             userService.addMoney(curMoney,userId);
-            System.out.println("咋回事");
+         //   System.out.println("咋回事");
             httpResponse.getWriter().write(alipayForm);
             httpResponse.getWriter().flush();
             httpResponse.getWriter().close();

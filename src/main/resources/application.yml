@@ -12,15 +12,15 @@ spring:
 # 默认配置
 server:
   port: 9000
-#tencentcloudapi:
-#  # 你的 secretId
-#  secretId: AKIDBF8wZzEICtOgnkU0LTN4YqunTwCF9sPi
-#  # 你的 secretKey
-#  secretKey: BBzay99wWt54r7B3jEpJahePwHPaYK9m
-#  # 请求官方地址 不变
-#  endpoint: iai.tencentcloudapi.com
-#  #地域 可不变
-#  region: ap-shanghai
+tencentcloudapi:
+  # 你的 secretId
+  secretId: AKIDBF8wZzEICtOgnkU0LTN4YqunTwCF9sPi
+  # 你的 secretKey
+  secretKey: BBzay99wWt54r7B3jEpJahePwHPaYK9m
+  # 请求官方地址 不变
+  endpoint: iai.tencentcloudapi.com
+  #地域 可不变
+  region: ap-shanghai
 
 mybatis-plus:
   configuration:
