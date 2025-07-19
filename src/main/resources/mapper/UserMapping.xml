@@ -4,6 +4,7 @@
 <!--头文件-->
 
 <mapper namespace="com.deyunjiaoyu.sportplay.dao.UserDao">
+
     <select id="getUserByMessage" resultType="com.deyunjiaoyu.sportplay.bean.User">
        	SELECT * FROM easyuser
        	WHERE username=#{username} AND password=#{password} AND state = 1 AND role = #{role}
@@ -88,12 +89,12 @@
     </update>
 
     <insert id="weightLog" >
-        INSERT INTO weight_log (user_id, date, weight)
+        INSERT INTO weight_log (userId, date, weight)
         VALUES (#{id}, #{currentTime}, #{weight})
     </insert>
 
     <select id="weightChart" resultType="com.deyunjiaoyu.sportplay.bean.WeightLog">
-         SELECT date,weight FROM weight_log WHERE user_id = #{id}
+         SELECT date,weight FROM weight_log WHERE userId = #{id}
     </select>
 
     <insert id="classCollected" >
@@ -103,24 +104,31 @@
     <delete id="classUnCollected">
         DELETE FROM class_collect WHERE class_id = #{id} AND user_id = #{userId}
     </delete>
+<!--    <resultMap id="commentMap" type="com.deyunjiaoyu.sportplay.bean.Comment">-->
+<!--        <result property="content" column="content"/>-->
+<!--        <result property="commentTime" column="comment_time"/>-->
+<!--        <result property="likeCount" column="like_count"/>-->
+<!--        <result property="userId" column="user_id"/>-->
+<!--        <result property="userName" column="user_name"/>-->
+<!--    </resultMap>-->
 
     <select id="getUserComment" resultType="com.deyunjiaoyu.sportplay.bean.Comment">
-        SELECT
+    SELECT
         c.content,
-        c.comment_time,
-        c.like_count,
-        c.user_id,
-        u.name AS user_name
-        FROM
+        c.commentTime,
+        c.userId,
+        u.name
+    FROM
         comment c
-        INNER JOIN
-        easyuser u ON c.user_id = u.id
-        WHERE
-        c.class_id = #{id}
-        LIMIT #{pageStart}, #{pageSize}
-    </select>
+    INNER JOIN
+        easyuser u ON c.userId = u.id
+    WHERE
+        c.classId = #{id}
+    LIMIT #{pageStart}, #{pageSize}
+</select>
+
     <insert id="sendComment" >
-        INSERT INTO comment (user_id,class_id,content,comment_time)
+        INSERT INTO comment (userId,classId,content,commentTime)
         VALUES (#{user_id}, #{class_id}, #{content},#{comment_time})
     </insert>
     <select id="findUser" resultType="com.deyunjiaoyu.sportplay.bean.HealthData">
@@ -181,11 +189,11 @@
         c.id,
         c.content,
         eu.email,
-        c.comment_time,
-        cl.title AS class_title
+        c.commentTime,
+        cl.title
     FROM comment c
-    INNER JOIN easyuser eu ON c.user_id = eu.id
-    INNER JOIN class cl ON c.class_id = cl.id
+    INNER JOIN easyuser eu ON c.userId = eu.id
+    INNER JOIN class cl ON c.classId = cl.id
 </select>
 
     <select id="getCommentCounts" resultType="java.lang.Integer">
@@ -195,4 +203,8 @@
     <delete id="deleteComment">
          DELETE FROM comment WHERE id = #{id}
     </delete>
+    <select id="getUserPic" resultType="java.lang.String">
+        SELECT pic FROM easyuser
+
+    </select>
 </mapper>

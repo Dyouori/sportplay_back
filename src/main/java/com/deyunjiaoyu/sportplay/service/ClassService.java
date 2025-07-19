@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface ClassService {
     int getClassCounts(String title);
+
     List<ClassInfo> getAllClass(String title, int pageStart, int pageSize);
+
     int addClass(ClassInfo classes);
     ClassInfo getUpdateClass(int id);
     int editClass(ClassInfo user);

@@ -47,7 +47,7 @@ public class LoginController {
         res.put("flag",flag);
         res.put("user",us);
         String res_json = JSON.toJSONString(res);//把对象转换成一个json串
-System.out.println("生成的token是："+token);
+
         return res_json;
     }
 

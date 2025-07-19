@@ -2,7 +2,7 @@ package com.deyunjiaoyu.sportplay.bean;
 
 public class ClassInfo {
     private int id;
-    private int classification_id;
+    private int classificationId;
     private String title;
     private String price;
     private String description;
@@ -13,12 +13,19 @@ public class ClassInfo {
     private String cover;
     private Integer rate;
     private Integer pv;
-    private Integer recommend_count;
+    private Integer recommendCount;
     private  Integer wish_count;
     private  Integer collect_count;
+    private  String ctitle;
+    private  String teacher;
 
-private  String classification_title;
-private  String teacher;
+    public String getCtitle() {
+        return ctitle;
+    }
+
+    public void setCtitle(String ctitle) {
+        this.ctitle = ctitle;
+    }
 
     public Integer getRate() {
         return rate;
@@ -36,12 +43,12 @@ private  String teacher;
         this.pv = pv;
     }
 
-    public Integer getRecommend_count() {
-        return recommend_count;
+    public Integer getRecommendCount() {
+        return recommendCount;
     }
 
-    public void setRecommend_count(Integer recommend_count) {
-        this.recommend_count = recommend_count;
+    public void setRecommendCount(Integer recommendCount) {
+        this.recommendCount = recommendCount;
     }
 
     public Integer getWish_count() {
@@ -68,13 +75,7 @@ private  String teacher;
         this.teacher = teacher;
     }
 
-    public String getClassification_title() {
-        return classification_title;
-    }
 
-    public void setClassification_title(String classification_title) {
-        this.classification_title = classification_title;
-    }
 
     public String getCover() {
         return cover;
@@ -92,17 +93,34 @@ private  String teacher;
         this.status = status;
     }
 
+    public int getClassificationId() {
+        return classificationId;
+    }
+
+    public void setClassificationId(int classificationId) {
+        this.classificationId = classificationId;
+    }
+
     @Override
     public String toString() {
         return "ClassInfo{" +
                 "id=" + id +
-                ", classification_id=" + classification_id +
+                ", classificationId=" + classificationId +
                 ", title='" + title + '\'' +
                 ", price='" + price + '\'' +
                 ", description='" + description + '\'' +
                 ", level='" + level + '\'' +
                 ", suitable='" + suitable + '\'' +
                 ", effect='" + effect + '\'' +
+                ", status='" + status + '\'' +
+                ", cover='" + cover + '\'' +
+                ", rate=" + rate +
+                ", pv=" + pv +
+                ", recommend_count=" + recommendCount +
+                ", wish_count=" + wish_count +
+                ", collect_count=" + collect_count +
+                ", ctitle='" + ctitle + '\'' +
+                ", teacher='" + teacher + '\'' +
                 '}';
     }
 
@@ -114,13 +132,6 @@ private  String teacher;
         this.id = id;
     }
 
-    public int getClassification_id() {
-        return classification_id;
-    }
-
-    public void setClassification_id(int classification_id) {
-        this.classification_id = classification_id;
-    }
 
     public String getTitle() {
         return title;

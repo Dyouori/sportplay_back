@@ -2,13 +2,13 @@ package com.deyunjiaoyu.sportplay.bean;
 
 public class Classification {
     private int id;
-    private String title;
+    private String ctitle;
 
     @Override
     public String toString() {
         return "Classification{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", ctitle='" + ctitle + '\'' +
                 '}';
     }
 
@@ -20,11 +20,11 @@ public class Classification {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCtitle() {
+        return ctitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCtitle(String ctitle) {
+        this.ctitle = ctitle;
     }
 }

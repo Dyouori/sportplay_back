@@ -9,7 +9,7 @@
         SELECT
         cl.id,
         cl.title,
-        cl.classification_id,
+        cl.classificationId,
         cl.teacher,
         cl.cover,
         cl.description,
@@ -18,12 +18,12 @@
         cl.suitable,
         cl.effect,
         cl.status,
-        cl.rate,
-        c.title AS classification_title
+        cl.recommendCount,
+        c.ctitle
         FROM
         class cl
         JOIN
-        classification c ON c.id = cl.classification_id
+        classification c ON c.id = cl.classificationId
         <where>
             <if test="title != null">
                 AND cl.title like #{title}
@@ -41,9 +41,9 @@
 
     <insert id="addClass">
     INSERT INTO class
-    (title, classification_id, teacher, cover, description, price, level, suitable, effect, status)
+    (title, classificationId, teacher, cover, description, price, level, suitable, effect, status)
     VALUES
-    (#{title}, #{classification_id}, #{teacher}, #{cover}, #{description}, #{price}, #{level}, #{suitable}, #{effect}, #{status})
+    (#{title}, #{classificationId}, #{teacher}, #{cover}, #{description}, #{price}, #{level}, #{suitable}, #{effect}, #{status})
 </insert>
 
     <select id="getUpdateClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
@@ -51,7 +51,7 @@
     </select>
 
     <update id="editClass">
-        UPDATE class SET title = #{title} , classification_id = #{classification_id} ,teacher = #{teacher},effect = #{effect} ,
+        UPDATE class SET title = #{title} , classificationId = #{classificationId} ,teacher = #{teacher},effect = #{effect} ,
         cover = #{cover}  ,description = #{description}  ,price = #{price} ,level = #{level} ,suitable = #{suitable}
         WHERE id = #{id}
     </update>
@@ -61,15 +61,15 @@
 
 <!--    chart-->
     <select id="findClassChart" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
-        select class.*,classification.title AS classification_title from class
-        LEFT JOIN classification on class.classification_id=classification.id
+        select class.*,classification.ctitle  from class
+        LEFT JOIN classification on class.classificationId=classification.id
     </select>
 <!--    根据类型选择当前类型的所有课程-->
     <select id="oneTypeClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">
         SELECT c.*
         FROM Class c
-        JOIN Classification cl ON c.classification_id = cl.id
-        WHERE cl.title = #{classification_title};
+        JOIN Classification cl ON c.classificationId = cl.id
+        WHERE cl.ctitle = #{classification_title};
 
     </select>
     <select id="oneLevelClass" resultType="com.deyunjiaoyu.sportplay.bean.ClassInfo">

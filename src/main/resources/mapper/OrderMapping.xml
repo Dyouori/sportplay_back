@@ -7,14 +7,6 @@
 
 <!--查出所有普通用户-->
     <select id="getAllOrder" resultType="com.deyunjiaoyu.sportplay.bean.Order">
-        <!--        SELECT * FROM order-->
-        <!--        <where>-->
-        <!--            <if test="username != null">-->
-        <!--                AND username like #{username}-->
-        <!--            </if>-->
-        <!--        </where>-->
-        <!--        LIMIT #{pageStart}, #{pageSize}-->
-
         SELECT
         o.*,
         eu.username AS username,
@@ -22,8 +14,8 @@
         c.price
         FROM
         `order` o
-        LEFT JOIN easyuser eu ON o.user_id = eu.id
-        LEFT JOIN class c ON o.class_id = c.id
+        LEFT JOIN easyuser eu ON o.userId = eu.id
+        LEFT JOIN class c ON o.classId = c.id
         <where>
             <if test="username != null">
                 AND eu.username like #{username}
@@ -42,16 +34,16 @@
         c.price AS price
         FROM
         `order` o
-        LEFT JOIN easyuser eu ON  o.user_id= eu.id
-        LEFT JOIN class c ON o.class_id = c.id
-        WHERE o.user_id=#{id}
+        LEFT JOIN easyuser eu ON  o.userId= eu.id
+        LEFT JOIN class c ON o.classId = c.id
+        WHERE o.userId=#{id}
 LIMIT #{pageStart}, #{pageSize}
     </select>
 
     <select id="getOrderCounts" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM `order` o
-        LEFT JOIN easyuser eu ON o.user_id = eu.id
+        LEFT JOIN easyuser eu ON o.userId = eu.id
         <if test="username != null">
             WHERE eu.username = #{username}
         </if>
@@ -60,7 +52,7 @@ LIMIT #{pageStart}, #{pageSize}
     <select id="getOneOrderCounts" resultType="java.lang.Integer">
         SELECT COUNT(*)
         FROM `order`
-        WHERE user_id=#{id}
+        WHERE userId=#{id}
     </select>
 
     <delete id="deleteOrder">
@@ -83,9 +75,9 @@ LIMIT #{pageStart}, #{pageSize}
     </select>
     <insert id="addOrder">
         INSERT INTO `order` (
-             user_id, class_id, status,order_number,pay_time,name,phone
+             userId, classId, status,orderNumber,payTime,name,phone
         ) VALUES (
-             #{user_id}, #{class_id}, #{status},#{order_number},#{pay_time},#{name},#{phone}
+             #{userId}, #{classId}, #{status},#{orderNumber},#{payTime},#{name},#{phone}
         )
     </insert>
 

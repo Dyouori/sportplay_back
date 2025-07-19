@@ -57,4 +57,5 @@ public interface UserDao {
     public List<Comment> getAllComment( @Param("pageStart") int pageStart,@Param("pageSize") int pageSize);
     public int getCommentCounts();
     public int deleteComment(int id);
+    public String getUserPic(int id);
 }

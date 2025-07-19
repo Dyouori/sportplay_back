@@ -168,4 +168,8 @@ public class UserServiceImpl implements UserService {
     public int deleteComment(int id) {
         return userDao.deleteComment(id);
     }
+    @Override
+    public String getUserPic(int id) {
+        return userDao.getUserPic(id);
+    }
 }

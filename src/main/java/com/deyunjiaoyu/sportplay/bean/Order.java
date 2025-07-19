@@ -4,18 +4,50 @@ import java.util.Date;
 
 public class Order {
     private int id;
-    private int user_id;
-    private int class_id;
+    private int userId;
+    private int classId;
     private int count;
     private String status;
     private String name;
-    private String order_number;
-    private Date pay_time;
+    private String orderNumber;
+    private Date payTime;
     private String phone;
 private  String cover;
 private String title;
     private String username;
     private String price;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
 
     public String getPrice() {
         return price;
@@ -65,21 +97,7 @@ private String title;
         this.id = id;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getClass_id() {
-        return class_id;
-    }
-
-    public void setClass_id(int class_id) {
-        this.class_id = class_id;
-    }
 
     public int getCount() {
         return count;
@@ -105,19 +123,5 @@ private String title;
         this.name = name;
     }
 
-    public String getOrder_number() {
-        return order_number;
-    }
 
-    public void setOrder_number(String order_number) {
-        this.order_number = order_number;
-    }
-
-    public Date getPay_time() {
-        return pay_time;
-    }
-
-    public void setPay_time(Date pay_time) {
-        this.pay_time = pay_time;
-    }
 }

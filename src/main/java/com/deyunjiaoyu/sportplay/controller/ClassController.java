@@ -35,7 +35,8 @@ public class ClassController {
         res.put("numbers",numbers);
         res.put("data",classes);
         String res_string = JSON.toJSONString(res);
-
+        System.out.println("------------------------------------------------------");
+    System.out.println("输出class试试"+classes);
         return res_string;
     }
     @PutMapping("/batchdeleteclass")

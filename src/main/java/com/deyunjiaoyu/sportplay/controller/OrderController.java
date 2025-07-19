@@ -78,21 +78,21 @@ public String  Recharge(int money,int id){
     }
     //开始买东西加订单
     @RequestMapping("/addOrder")
-    public String  addOrder(@RequestParam("user_id") Integer user_id,
-                            @RequestParam("class_id") Integer class_id,
+    public String  addOrder(@RequestParam("userId") Integer user_id,
+                            @RequestParam("classId") Integer class_id,
                             @RequestParam("price") String price,
                             @RequestParam("status") String status,
-                            @RequestParam("order_number") String order_number,
+                            @RequestParam("orderNumber") String order_number,
                             @RequestParam("name") String name,
                             @RequestParam("phone") String phone
     ){
         // 根据查询参数创建Order对象
         Order order = new Order();
-        order.setUser_id(user_id);
-        order.setClass_id(class_id);
+        order.setUserId(user_id);
+        order.setClassId(class_id);
         order.setPrice(price);
         order.setStatus(status);
-        order.setOrder_number(order_number);
+        order.setOrderNumber(order_number);
         order.setName(name);
         order.setPhone(phone);
         // 获取当前时间
@@ -106,7 +106,7 @@ public String  Recharge(int money,int id){
         // 如果你需要java.util.Date类型，你可以进一步转换
         java.util.Date pay_time = java.sql.Date.valueOf(currentDate);
 
-        order.setPay_time(pay_time);
+        order.setPayTime(pay_time);
 
         int i = orderService.addOrder(order);
         return i > 0 ? "success":"error";

@@ -40,7 +40,7 @@ public class FoodInfoController {
     @RequestMapping("/addfood")
     public ResponseEntity<String> addUser(@RequestBody FoodInfo classes) {
 
-        if (!foodInfoService.getAllFood(classes.getFood_name(),1,5).isEmpty()) {
+        if (!foodInfoService.getAllFood(classes.getFoodName(),1,5).isEmpty()) {
             return new ResponseEntity<>("error2", HttpStatus.BAD_REQUEST);
         }
         // 添加用户逻辑

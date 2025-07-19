@@ -5,10 +5,16 @@ import java.util.Date;
 public class WeightLog {
     private int id;
     private int weight;
-    private int user_id;
+    private int userId;
     private Date date;
 
+    public int getUserId() {
+        return userId;
+    }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public int getId() {
         return id;
@@ -26,13 +32,6 @@ public class WeightLog {
         this.weight = weight;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
 
     public Date getDate() {
         return date;

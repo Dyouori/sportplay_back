@@ -2,19 +2,11 @@ package com.deyunjiaoyu.sportplay.bean;
 
 public class FoodInfo {
     private int id;
-    private String food_name;
-    private int food_type;
+    private Integer foodType;
+    private String foodName;
     private String calorie;
     private int score;
-private String food_type_title;
-
-    public String getFood_type_title() {
-        return food_type_title;
-    }
-
-    public void setFood_type_title(String food_type_title) {
-        this.food_type_title = food_type_title;
-    }
+    private String foodTypeTitle;
 
     public int getId() {
         return id;
@@ -24,20 +16,20 @@ private String food_type_title;
         this.id = id;
     }
 
-    public String getFood_name() {
-        return food_name;
+    public Integer getFoodType() {
+        return foodType;
     }
 
-    public void setFood_name(String food_name) {
-        this.food_name = food_name;
+    public void setFoodType(Integer foodType) {
+        this.foodType = foodType;
     }
 
-    public int getFood_type() {
-        return food_type;
+    public String getFoodName() {
+        return foodName;
     }
 
-    public void setFood_type(int food_type) {
-        this.food_type = food_type;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
     public String getCalorie() {
@@ -54,5 +46,13 @@ private String food_type_title;
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getFoodTypeTitle() {
+        return foodTypeTitle;
+    }
+
+    public void setFoodTypeTitle(String foodTypeTitle) {
+        this.foodTypeTitle = foodTypeTitle;
     }
 }

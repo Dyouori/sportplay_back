@@ -7,7 +7,7 @@
         SELECT * FROM classification
         <where>
             <if test="title != null">
-                AND title like #{title}
+                AND ctitle like #{title}
             </if>
         </where>
     </select>
@@ -15,7 +15,7 @@
     <select id="getClassifiCounts" resultType="java.lang.Integer">
         SELECT count(*) FROM `classification`
         <if test="title!=null ">
-            WHERE title like #{title}
+            WHERE ctitle like #{title}
         </if>
     </select>
 <!--    删除分类-->
@@ -28,12 +28,12 @@
     </select>
 <!--    正式更新-->
     <update id="editClassifi">
-        UPDATE classification SET title = #{title} WHERE id = #{id}
+        UPDATE classification SET ctitle = #{ctitle} WHERE id = #{id}
     </update>
 <!--    添加-->
     <!-- 在你的mapper XML文件中 -->
     <insert id="addClassifi">
-    INSERT INTO classification (title) VALUES (#{title})
+    INSERT INTO classification (ctitle) VALUES (#{ctitle})
 </insert>
 
 

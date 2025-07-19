@@ -51,4 +51,5 @@ UserCondition getWeight(Integer  id);
     List<Comment> getAllComment(int pageStart, int pageSize);
     int getCommentCounts();
     int deleteComment(int id);
+    String getUserPic(int id);
 }

@@ -169,10 +169,11 @@ public class UserController {
     //存储用户评论
    @RequestMapping("/sendComment")
     public String sendComment(@RequestBody Comment comment){
-
+System.out.println("----------------------------------------");
+System.out.println("数据"+comment.getUserId());
        Date comment_time = new Date();
-       System.out.println(comment.getUser_id()+comment.getClass_id()+comment.getContent());
-       int i = userService.sendComment(comment.getUser_id(),comment.getClass_id(),comment.getContent(),comment_time);
+       System.out.println(comment.getUserId()+comment.getClassId()+comment.getContent());
+       int i = userService.sendComment(comment.getUserId(),comment.getClassId(),comment.getContent(),comment_time);
        return i > 0 ? "success" : "error";
    }
    //编辑健康数据
@@ -294,6 +295,11 @@ public class UserController {
     public String deleteComment(int id){
         int i = userService.deleteComment(id);
         return i > 0 ? "success":"error";
+    }
+    @RequestMapping("/getUserPic")
+    public String getUserPic(@RequestParam("id")int id){
+        String i = userService.getUserPic(id);
+        return i ;
     }
 }
 

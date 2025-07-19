@@ -33,8 +33,8 @@ public class EchartsController {
 //        stream流
 //        先把这个list打散,过滤每一项，再连接，分组是通过key，value，然后这样分组
        Map<String,Long> collect = list.stream()
-               .filter(x -> ObjectUtil.isNotEmpty(x.getClassification_title()))
-               .collect(Collectors.groupingBy(ClassInfo::getClassification_title,Collectors.counting()));
+               .filter(x -> ObjectUtil.isNotEmpty(x.getCtitle()))
+               .collect(Collectors.groupingBy(ClassInfo::getCtitle,Collectors.counting()));
 
         List<Map<String,Object>> mapList = new ArrayList<>();
         if(CollectionUtil.isNotEmpty(collect)){

@@ -55,7 +55,7 @@ public class ClassificationController {
     ///添加
     @RequestMapping("/addclassifi")
     public ResponseEntity<String> addClassifi(@RequestBody Classification classification) {
-        if (!classService.getAllClassification(classification.getTitle()).isEmpty()) {
+        if (!classService.getAllClassification(classification.getCtitle()).isEmpty()) {
             return new ResponseEntity<>("error2", HttpStatus.BAD_REQUEST);
         }
 

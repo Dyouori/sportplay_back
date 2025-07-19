@@ -8,35 +8,47 @@ import java.util.Date;
 public class Comment {
     private int id;
     private String content;
-    private Date comment_time;
-    private int like_count;
-    private int user_id;
-    private int class_id;
+    private Date commentTime;
+
+    private int userId;
+    private String userName;
+    private String name;
+    private int classId;
     private String pic;
-    private String user_name;
 
-    public String getUser_name() {
-        return user_name;
+    public String getName() {
+        return name;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getComment_time() {
-        return comment_time;
+    public Date getCommentTime() {
+        return commentTime;
     }
 
-    public void setComment_time(Date comment_time) {
-        this.comment_time = comment_time;
+    public void setCommentTime(Date commentTime) {
+        this.commentTime = commentTime;
     }
-//    public LocalDateTime getComment_time() {
-//        return comment_time;
-//    }
-//
-//    public void setComment_time(LocalDateTime comment_time) {
-//        this.comment_time = comment_time;
-//    }
+
+
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public int getId() {
         return id;
@@ -54,30 +66,12 @@ public class Comment {
         this.content = content;
     }
 
-
-
-    public int getLike_count() {
-        return like_count;
+    public int getClassId() {
+        return classId;
     }
 
-    public void setLike_count(int like_count) {
-        this.like_count = like_count;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getClass_id() {
-        return class_id;
-    }
-
-    public void setClass_id(int class_id) {
-        this.class_id = class_id;
+    public void setClassId(int classId) {
+        this.classId = classId;
     }
 
     public String getPic() {
